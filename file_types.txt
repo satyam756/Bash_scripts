@@ -1,0 +1,39 @@
+******** File Types ************
+
+|=======================================|
+|File Symbol   |   Meaning              |
+|=======================================|
+|    -         | Regular File           |
+|    d         | Directory              |
+|    l         | Link                   |
+|    c         | Special file or device |
+|    s         | Socket                 |
+|    P         | Named Pipe             |
+|    b         | Block device           |
+|=======================================|
+
+*****************************************
+
+********** WildCards in Linux **********
+****************************************
+
+Wildcard is a character that can be used as a substitute for any of a class of characters in a search.
+
+> * - represents zero or more characters 
+> ? - represents a single character
+> [] - represents a range of characters 
+> \ - an escape character 
+> ^ - beginning of the line
+> $ - end of the line
+
+ex-1: touch abc{1..20}.txt # creates abc1 to abc20.txt files
+rm abc* # removes all the files starting with abc
+
+ex-2: touch abcd{1..10}.txt # creates abcd1 to abcd10.txt files
+ls -l ?bcd* # list any file which is having 2nd letter starting with bcd
+
+ex-3: touch abc{1..5}.map # creates abc1 to abc5.map 
+ls -l *[bc]* # list any file which is having 2nd and 3rd letter as b and c.
+
+
+
