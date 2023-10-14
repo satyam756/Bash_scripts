@@ -1,0 +1,38 @@
+> inode - pointer or a number of a file on the hard disk.
+
+> Soft Link - Link will be removed if file is removed or renmaned 
+
+> Hard Link - Deleting renaming or moving the original file will not affect the hard link.
+
+> Command for hard link:
+-> ln
+
+> Command for soft link:
+-> ln -s
+
+                   |-------|
+     |-----------> | inode |
+     |             |-------|
+     |                  ^
+     |                  | 
+|---------|        |-------|     |-------------|
+|hard link|        |my file|     |  Soft Link  | 
+|---------|        |-------|     |-------------|
+                        ^               |
+                        |---------------|               
+        
+touch /home/user/abc
+cd /tmp
+ln -s /home/user/abc # creates a soft link
+ls -ltr
+lrexrexrex. 1 user user 14 Oct 04:28:22 abc -> /home/user/abc
+
+ls -ltri # i is for inode 
+rm -f /home/user/abc
+# if source file is deleted the link will no longer work
+
+touch /home/user/abc
+cd /tmp
+ln /home/user/abc # Creates hard link
+ # if source file is deleted, the hard link does not get affected..
+ 
