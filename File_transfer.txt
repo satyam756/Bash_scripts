@@ -1,0 +1,43 @@
+File Transfer methods in Linux:
+
+> ftp - FILE TRANSFER PROTOCOL 
+
+> scp - SECURE COPY PROTOCOL
+
+> rsync - REMOTE SYNCHRONIZATION
+
+====================================
+
+VSFTPD - daemon for ftp 
+
+ps -ef | grep ftp
+
+> ftp - FILE TRANSFER PROTOCOL:
+
+# ftp ftp.server.com
+Enter username:
+Enter password:
+
+At the ftp prompt 
+ftp>put filename 
+
+To exit 
+ftp>bye
+
+> use get command to pull file from remote server
+
+======================================================
+
+> scp - SECURE COPY PROTOCOL
+
+ex: 
+    scp filename RemoteServer:/Destination Path
+
+    scp abc.txt MyFirstLinuxOS:/home/satyam/ps
+    password:
+
+======================================================
+
+> rsync - REMOTE SYNCHRONIZATION
+    used for file system backups.
+    

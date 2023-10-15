@@ -1,0 +1,11 @@
+> RAID - Redundant Array of Independent Disks
+
+> Type of RAID:
+
+> RAID0 - data warehousing, 2 hard disks 5g + 5g = 10g, if one disk dies have data loose
+
+> RAID1 - 5,5 = 5G, mirror of DISK1, if one disk dies data can be recoverd from other disk, it's slow due to replications.
+
+> RAID5 - 5+5+5=12G, takes some storage to write the parity data, if any one of the disks failed data can still be retrived from other 2 disks.
+
+
