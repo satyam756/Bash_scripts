@@ -1,0 +1,61 @@
+System utlity commands:
+
+date
+uptime 
+hostname
+which 
+cal 
+bc
+
+> Log monitoring 
+
+default Log directory:
+
+/var/log 
+
+> boot
+
+>chronyd = NTP
+
+>cron
+
+>maillog
+
+>secure
+
+>messages
+
+>httpd
+
+=================================================
+
+cd /var/log
+
+ll | more # to list files in ascending order.
+
+> root user has the access to read the files | su -
+
+> check boot.log 
+> chrony - service log
+> cron - logs releted to crontab
+> dmesg
+> maillog - send or receive mail activity are recorded in this log file.
+> secure - records all loging in and loging out activity.
+# tail -f secure - snifs the upcoming request and shows in bottom.
+> messages - all the hardware and software, applicatio and process info
+#grep -i error messages
+
+============================================================================
+
+Terminal commands:
+
+> clear:
+    clears the screen.
+    cntrl+l also works same.
+
+> exit:
+    exit out of the shell,terminal or user session.
+
+> script:
+    stores terminal activities in a log file that can be named by a user.
+    if name is not provided by user the default file name is typescript.
