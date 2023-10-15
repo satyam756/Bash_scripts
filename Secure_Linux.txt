@@ -1,0 +1,97 @@
+> Checking for a user when last password change or other info:
+
+> chage -l username 
+
+> chage --help # get more help 
+
+> cat /etc/shadow # get the same attributes number mentioned from chage cmd.
+
+> cat /etc/logindfs # max password and days can be applied.
+
+> cat /etc/pam.d/system-auth 
+
+> rpm -qa or rpm -qa | wc -l # list of packages 
+
+> rpm -e # remove any package.
+
+> systemctl -a # shows all the active and inactive services in linux 
+
+> netstat -tunlp # check the ports and other info for the services.
+
+> cat /etc/ssh/sshd_config # secure ssh configuration from here.
+    PermitRootLogin=no
+
+> firewall-config # gui to enable,add, remove ports and protocols.
+
+> firewall-cmd # command line based 
+
+> iptables # older version, /etc/sysconfig/iptables-config
+           # new version, /etc/firewalld/firewalld.conf
+
+> SELinux: Security Enhanced Linux (can control process permissions)
+    sestatus -> check SELinux status: enable, getenforce
+    /etc/sysconfig/selinux
+    /etc/selinux/config
+
+    > 3 modes of SELinux:
+    1) enforcing - SELinux Security policy is enforced.
+    2) permissive - SELinux prints warning insted of enforcing.
+    3) disabled - No SELinux policy is loaded.
+
+    > 3 values of SELinux:
+    1) targeted - Targeted processes are protected.
+    2) minimum - Modification of targeted policy. only selected processes are protected.
+    3) mls - Multi Level Security protection.
+    
+    stat fileName: check for context.
+
+    man chcon, checkpolicy
+
+> --rwxr--r--
+    u  g  o (user, group, others) -> DAC - Discretionary Access control
+
+> SELinux(MAC) - Mandatory Access control
+
+> before rebooting create a file: / .autorelable
+
+> 2 main concepts of SELinux:
+    1) Labeling 
+    2) Type enforcement
+
+> To list the label of a directory:
+    ex: ls -lz /usr/sbin/httpd
+    -rwxr-xr-x root root system_u:object_r:httpd_exec_t:so /usr/sbin/https
+
+    ex: ls -dz /etc/httpd
+    drwxr-xr-x root root system_u:object_r:httpd_config_t:so /etc/httpd
+
+> Commands to manage SELinux settings:
+    semanage - to label
+    login
+    user
+    port
+    interface
+    module
+    node
+    file context
+    boolean - on/off switch
+    permissive state
+    dontaudit
+
+> boolean:
+    ex: do we allow ftp server to access home directory's - on/off
+
+    ex: can httpd talk to ldap - on/off
+
+> getsebool -a or semanage boolean -l (get all the available boolean list)
+
+> enable or turn on a boolean:
+    setsebool -P boolean_name on
+
+> check error messages related to SELinux:
+    journalctl
+
+> To change the type in a label:
+    chcon -t httpd_sys_content_t FILENAME
+    semanage -t httpd_sys_content_t FILENAME
+
