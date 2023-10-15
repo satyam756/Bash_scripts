@@ -1,0 +1,140 @@
+=================================================
+
+> Replace a string in a file with a newstring
+
+> find and delete line 
+
+> Remove empty lines from Files.
+
+> Remove the first or n lines in file 
+
+> To replace tabs with spaces.
+
+> show Defined lines from a file
+
+=================================================
+
+create a file seinfeld-characters.
+
+cat seinfeld-characters
+Jerry Seinfeld
+Cosmo Kramer
+George Costanza
+Newman Mailman
+Frank Costanza
+Estelle Costanza
+Morty Seinfeld
+Helen Seinfeld
+Babes Kramer
+Alton Benes
+J Perterman 
+George Steinbrenner
+Uncle Joe
+David Puddy 
+Justin Pit
+Kenny Bania
+Another Costanza
+
+=========================================================
+
+ex 1: Replace the word Kenny from above text file to Lenny 
+
+sed 's/Kenny/Lenny/g' seinfeld-characters # s stands for subsitute, g stands for global
+
+> above command just shows the changed output in terminal screen but dose not updates the actual file.
+
+sed -i 's/Kenny/Lenny/g' seinfeld-characters # g stands for global 
+
+> -i stands for insert in the actual file.
+
+===============================================================
+
+ex 2: Remove all the Costanza in the file 
+
+sed 's/Costanza//g' seinfeld-characters
+
+> above commands subsitutes Costanza with space globaly.
+
+===============================================================
+
+ex 3: Find string of line and remove it 
+
+> remove any line which is having seinfeld in it.
+
+sed '/seinfeld/d' seinfeld-characters # d is to delete the lines.
+
+=================================================================
+
+ex 4: remove empty lines from a file.
+
+> add some empty lines into the file seinfeld-characters.
+
+sed '/^$/d' seinfeld-characters # showing in terminal
+
+sed -i '/^$/d' seinfeld-characters # changes the actual file.
+
+> anything which is starting and ending with nothing ie empty lines will get deleted.
+
+=======================================================================
+
+ex 5: Delete the first line of the file.
+
+sed '1d' seinfeld-characters
+
+> 1d is for the first line delete.
+
+=======================================================================
+
+ex 6: Delete first 2 lines of the file.
+
+sed '1,2d' seinfeld-characters
+
+> nd is for the first n line delete.
+
+=======================================================================
+
+ex 7: remove tabs with spaces.
+
+> Add some spaces in Seinfeld-characters file.
+
+sed -i 's/\t/ /g' seinfeld-characters
+
+> \t is for the tab space and / /g is to replace globally tab with space.
+
+> do vice versa for space to tab replace.
+
+===========================================================================
+
+ex 8: view the specifice line number records.
+
+sed -n 12,18p seinfeld-characters
+
+> shows only lines from 12 to 18.
+
+===============================================================================
+
+ex 9: view all the data except line 12 to 18.
+
+sed 12.18d seinfeld-characters
+
+> shows all the lines execpt from 12 to 18.
+
+==================================================================================
+
+ex 10: add empty line after each record.
+
+sed G seinfeld-characters
+
+> G is to add empty line after each record.
+
+==================================================================================
+
+ex 11: replace all the seinfeld with s execpt line number 8.
+
+sed '8!s/Seinfeld/s/' seinfeld-characters
+
+> 8! restricts sed to not to replace.
+
+==================================================================================
+
+:%s/Seinfeld/Peter/ -> inside VI
