@@ -1,0 +1,82 @@
+NIC - Network Interface Card.
+
+> modprobe bonding 
+
+> modinfo bonding 
+
+> create /etc/sysconfig/network-scripts/ifcfg-bond0
+
+> edit /etc/sysconfig/network-scripts/ethernet1
+
+> edit /etc/sysconfig/network-scripts/ethernet2
+
+
+  |----------|
+  |  nic 1   |
+  |----------| ----------> |-------------|
+                           |             |
+  |----------| ----------> |  bond 0     |
+  |  nic 2   |             |-------------|
+  |----------|
+
+  > Restart network  = systemctl restart network.
+
+> take a snapshot before changing anything 
+
+> su - 
+
+> check if modprob is installed or not
+    modinfo bonding | more # if description is present it's good to go.
+
+> create a new file ifcfg-bond0 inside /etc/sysconfig/network-scripts
+    vi /etc/sysconfig/network-scripts/ifcfg-bond0
+    > add the following parameters:
+    DEVICE=bond0
+    TYPE=Bond
+    NAME=bond0
+    BONDING_MASTER=yes # self
+    BOOTPROTO=none # none or static, if want to assign any static ip 
+    ONBOOT=yes # yes to enable when system reboots
+    IPADDR=192.168.1.80 # ping 192.168.1.80 no ping
+    NETMASK=255.255.255.0
+    GATEWAY=192.168.1.1 # IP Address of moderm.
+    BONDING_OPTS="mode=5 miimon=100"
+
+> save and exit the file 
+
+> Edit the first NIC file
+    vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
+    Delete the entire content.
+    > Add the following parameters:
+    TYPE=Ethernet
+    BOOTPROTO=none
+    DEVICE=enp0s3
+    ONBOOT=yes
+    HWADDR=mac_address # ifconfig | more -> ether: copy the Address
+    MASTER=bond0
+    SLAVE=yes
+
+> save and exit the file     
+
+> Edit the second NIC file
+    vi /etc/sysconfig/network-scripts/ifcfg-enp0s8
+    Delete the entire content.
+    > Add the following parameters:
+    TYPE=Ethernet
+    BOOTPROTO=none
+    DEVICE=enp0s8
+    ONBOOT=yes
+    HWADDR=mac_address # ifconfig | more -> ether: copy the Address
+    MASTER=bond0
+    SLAVE=yes
+
+> save and exit the file     
+
+> Restart the network
+    systemctl restart network
+
+> ifconfig | more 
+
+> To verify login to 192.168.1.80
+    cat /proc/net/bonding/bond0
+    
